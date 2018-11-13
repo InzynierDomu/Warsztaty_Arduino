@@ -13,8 +13,8 @@ void setup()
  pinMode(CLK,INPUT); 
 
  //przerwania
- attachInterrupt(0, blinkA, LOW); 
- attachInterrupt(1, blinkB, LOW); 
+ attachInterrupt(digitalPinToInterrupt(DT), dekrementacja, LOW); 
+ attachInterrupt(digitalPinToInterrupt(CLK), inkrementacja, LOW); 
  
  time = millis(); 
 }
@@ -28,15 +28,15 @@ void loop()
  }
 }
 
-//osobne metody wywoływane w odpowiednim czasie 
-void blinkA()
+//osobne metody wywoływane od przerwań 
+void dekrementacja()
 {
  if ((millis() - time) > 3)
  ilosc_impulsow--; 
  time = millis();
 }
  
-void blinkB()
+void inkrementacja()
 {
  if ((millis() - time) > 3) 
  ilosc_impulsow++ ;
